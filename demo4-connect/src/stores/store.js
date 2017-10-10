@@ -7,7 +7,7 @@ const counterVal = {
     third: 40
 }
 
-const store = createStore(Reducer,counterVal)
+const store = createStore(Reducer, counterVal)
 
 export default store
 
