@@ -1,5 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
+
+import {FILTERTYPES} from "../../constant";
 import {toggleTodo, removeTodo} from "../action";
 import TodoItem from './TodoItem'
 
@@ -21,8 +23,19 @@ const TodoList = ({todo, onToggle, onRemove}) => {
     )
 }
 
+const showMatch = (todoState, filter) => {
+    switch (filter) {
+        case FILTERTYPES.COMPLETED:
+            return todoState.filter(stateItem => stateItem.complete)
+        case FILTERTYPES.UNCOMPLETED:
+            return todoState.filter(stateItem => !stateItem.complete)
+        default:
+            return todoState
+    }
+}
+
 const mapState = state => ({
-    todo: state
+    todo: showMatch(state.todo,state.filter)
 })
 
 const mapDispatch = dispatch => ({
