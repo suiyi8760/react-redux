@@ -5,11 +5,11 @@ import {FILTERTYPES} from "../../constant";
 import {toggleTodo, removeTodo} from "../action";
 import TodoItem from './TodoItem'
 
-const TodoList = ({todo, onToggle, onRemove}) => {
+const TodoList = ({todo, filter, onToggle, onRemove}) => {
     return (
-        <ul>
+        <ul className={`todo-list`}>
             {
-                todo.map(item => (
+                todo[0] ? todo.map(item => (
                     <TodoItem
                         key={item.id}
                         text={item.text}
@@ -17,7 +17,7 @@ const TodoList = ({todo, onToggle, onRemove}) => {
                         onToggle={() => onToggle(item.id)}
                         onRemove={() => onRemove(item.id)}
                     />
-                ))
+                )) : `No ${filter === 'all' ? '' : filter} item.`
             }
         </ul>
     )
@@ -29,13 +29,16 @@ const showMatch = (todoState, filter) => {
             return todoState.filter(stateItem => stateItem.complete)
         case FILTERTYPES.UNCOMPLETED:
             return todoState.filter(stateItem => !stateItem.complete)
-        default:
+        case FILTERTYPES.ALL:
             return todoState
+        default:
+            throw new Error('unsupported filter')
     }
 }
 
 const mapState = state => ({
-    todo: showMatch(state.todo,state.filter)
+    todo: showMatch(state.todo, state.filter),
+    filter: state.filter
 })
 
 const mapDispatch = dispatch => ({

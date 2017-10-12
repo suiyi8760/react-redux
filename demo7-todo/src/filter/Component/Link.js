@@ -5,11 +5,11 @@ import {changeFilter} from "../action"
 const Link = ({active,onClick,children}) => {
     if(active){
         return (
-            <b>{children}</b>
+            <b className={`filter`}>{children}</b>
         )
     } else {
         return (
-            <a href={`#$children$`} onClick={onClick}>{children}</a>
+            <a className={`filter not-selected`} href={`#${children}`} onClick={onClick}>{children}</a>
         )
     }
 }
