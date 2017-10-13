@@ -24,4 +24,4 @@ const mapDispatch = (dispatch, ownProps) => ({
     }
 })
 
-export default connect(null, mapDispatch)(TodoItem)
+export default connect(null,mapDispatch)(TodoItem)

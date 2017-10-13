@@ -1,7 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import {FILTERTYPES} from "../../constant";
+// import {FILTERTYPES} from "../../constant";
+// import{toggleTodo,removeTodo} from "../action";
+import {showMatch} from "../selector";
 import TodoItem from './TodoItem'
 
 const TodoList = ({todo, filter}) => {
@@ -14,8 +16,8 @@ const TodoList = ({todo, filter}) => {
                         id={item.id}
                         text={item.text}
                         complete={item.complete}
-                        /*onToggle={() => onToggle(item.id)}
-                        onRemove={() => onRemove(item.id)}*/
+                        // onToggle={() => onToggle(item.id)}
+                        // onRemove={() => onRemove(item.id)}
                     />
                 )) : `No ${filter === 'all' ? '' : filter} item.`
             }
@@ -23,7 +25,7 @@ const TodoList = ({todo, filter}) => {
     )
 }
 
-const showMatch = (todoState, filter) => {
+/*const showMatch = (todoState, filter) => {
     switch (filter) {
         case FILTERTYPES.COMPLETED:
             return todoState.filter(stateItem => stateItem.complete)
@@ -34,10 +36,11 @@ const showMatch = (todoState, filter) => {
         default:
             throw new Error('unsupported filter')
     }
-}
+}*/
 
 const mapState = state => ({
-    todo: showMatch(state.todo, state.filter),
+    // todo: showMatch(state.todo, state.filter),
+    todo: showMatch(state),
     filter: state.filter
 })
 
