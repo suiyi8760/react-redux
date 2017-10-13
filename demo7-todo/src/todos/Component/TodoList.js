@@ -2,20 +2,20 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 import {FILTERTYPES} from "../../constant";
-import {toggleTodo, removeTodo} from "../action";
 import TodoItem from './TodoItem'
 
-const TodoList = ({todo, filter, onToggle, onRemove}) => {
+const TodoList = ({todo, filter}) => {
     return (
         <ul className={`todo-list`}>
             {
                 todo[0] ? todo.map(item => (
                     <TodoItem
                         key={item.id}
+                        id={item.id}
                         text={item.text}
                         complete={item.complete}
-                        onToggle={() => onToggle(item.id)}
-                        onRemove={() => onRemove(item.id)}
+                        /*onToggle={() => onToggle(item.id)}
+                        onRemove={() => onRemove(item.id)}*/
                     />
                 )) : `No ${filter === 'all' ? '' : filter} item.`
             }
@@ -41,13 +41,13 @@ const mapState = state => ({
     filter: state.filter
 })
 
-const mapDispatch = dispatch => ({
+/*const mapDispatch = dispatch => ({
     onToggle(id) {
         dispatch(toggleTodo(id))
     },
     onRemove(id) {
         dispatch(removeTodo(id))
     }
-})
+})*/
 
-export default connect(mapState, mapDispatch)(TodoList)
+export default connect(mapState)(TodoList)
