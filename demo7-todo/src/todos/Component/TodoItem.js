@@ -1,6 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-export default ({text, complete, onToggle, onRemove}) => {
+const TodoItem = ({text, complete, onToggle, onRemove}) => {
     return (
         <li className={`todo-item`}
             style={
@@ -12,3 +13,9 @@ export default ({text, complete, onToggle, onRemove}) => {
         </li>
     )
 }
+
+const mapDispatch = (dispatch,ownProps) => {
+
+}
+
+export default connect()(TodoItem)
