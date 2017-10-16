@@ -20,7 +20,7 @@ class TodoItem extends Component {
 
     render() {
         const {text, complete, typeItem, types, onToggle, onRemove} = this.props
-        console.log(this.props);
+
         return (
             <li className={`todo-item`}
                 style={
@@ -31,7 +31,7 @@ class TodoItem extends Component {
                 }>
                 <input type="checkbox" className={`toggle`} checked={complete} readOnly onClick={onToggle}/>
                 <label className={`text`}>{text} </label>
-                <select onChange={this.getSelect}>
+                <select onChange={this.getSelect} value={this.state.todoType}>
                     {
                         types.map(typeItem => <option key={typeItem.id} value={typeItem.id}>{typeItem.name}</option>)
                     }
