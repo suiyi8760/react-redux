@@ -22,7 +22,10 @@ export const showMatch = createSelector(
     }
 )
 
-export const getTypeInfo = (typeId, state) => createSelector(
+export const getTypeInfo = createSelector(
     [getType, getTodo],
-    typeState => typeState.filter(typeItem => typeItem.id === typeId)[0]
-)(state)
+    typeState => {
+        console.log(1);
+        return typeState.filter(typeItem => typeItem.id === typeId)[0]
+    }
+)

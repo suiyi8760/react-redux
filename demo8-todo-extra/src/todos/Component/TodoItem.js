@@ -12,7 +12,7 @@ class TodoItem extends Component {
     }
 
     getSelect = event => {
-        const typeId = parseInt(event.target.value);
+        const typeId = Number(event.target.value);
 
         this.setState({todoType: typeId})
         this.props.onChangeType(typeId)
@@ -44,7 +44,7 @@ class TodoItem extends Component {
 
 const mapState = (state, ownProps) => {
     return ({
-        typeItem: getTypeInfo(ownProps.type, state),
+        typeItem: getTypeInfo(state),
         types: state.todoType
     })
 }
