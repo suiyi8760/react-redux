@@ -44,7 +44,7 @@ class TodoItem extends Component {
 
 const mapState = (state, ownProps) => {
     return ({
-        typeItem: getTypeInfo(state),
+        typeItem: getTypeInfo(state,ownProps),
         types: state.todoType
     })
 }
