@@ -4,7 +4,7 @@ import {FILTERTYPES} from "../constant"
 
 const getTodo = state => state.todo
 const getFilter = state => state.filter
-const getTypeId = (state,props) => props.type
+const getTypeId = (state, props) => props.type
 const getType = state => state.todoType
 
 export const showMatch = createSelector(
@@ -24,8 +24,8 @@ export const showMatch = createSelector(
 )
 
 export const getTypeInfo = createSelector(
-    [getType, getTypeId,getTodo],
-    (typeState,typeId) => {
+    [getType, getTypeId, getTodo],
+    (typeState, typeId) => {
         console.log(1);
         return typeState.filter(typeItem => typeItem.id === typeId)[0]
     }
