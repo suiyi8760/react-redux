@@ -2,10 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import store from './store/Store'
-import {Provider} from 'react-redux'
-
-import TodoApp from './TodoApp'
+import Countdown from './Countdown'
 
 class App extends Component {
     render() {
@@ -15,9 +12,12 @@ class App extends Component {
                     <img src={logo} className="App-logo" alt="logo"/>
                     <h1 className="App-title">TODO LIST DEMO</h1>
                 </header>
-                <Provider store={store}>
-                    <TodoApp></TodoApp>
-                </Provider>
+                <Countdown beginValue={10}>
+                    {(count) => (<div>{count > 0 ? count : 'Happy New Year'}</div>)}
+                </Countdown>
+                <Countdown beginValue={5}>
+                    {(count) => (<div>{count > 0 ? count : 'Rocket Go!'}</div>)}
+                </Countdown>
             </div>
         );
     }
