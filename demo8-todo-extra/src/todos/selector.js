@@ -1,4 +1,3 @@
-// import React from 'react'
 import {createSelector} from 'reselect'
 import {FILTERTYPES} from "../constant"
 
@@ -23,10 +22,10 @@ export const showMatch = createSelector(
     }
 )
 
-export const getTypeInfo = createSelector(
+export const getTypeInfo = () => createSelector(
     [getType, getTypeId, getTodo],
     (typeState, typeId) => {
-        console.log(1);
+        console.log(typeId);
         return typeState.filter(typeItem => typeItem.id === typeId)[0]
     }
 )

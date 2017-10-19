@@ -42,11 +42,22 @@ class TodoItem extends Component {
     }
 }
 
-const mapState = (state, ownProps) => {
+/*const mapState = (state, ownProps) => {
     return ({
-        typeItem: getTypeInfo(state,ownProps),
+        typeItem: getTypeInfo(state, ownProps),
         types: state.todoType
     })
+}*/
+
+const makeMapState = () => {
+    const getOwnTypeInfo = getTypeInfo()
+    const mapState = (state, props) => {
+        return {
+            typeItem: getOwnTypeInfo(state, props),
+            types: state.todoType
+        }
+    }
+    return mapState
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
@@ -61,4 +72,4 @@ const mapDispatch = (dispatch, ownProps) => ({
     }
 })
 
-export default connect(mapState, mapDispatch)(TodoItem)
+export default connect(makeMapState, mapDispatch)(TodoItem)
