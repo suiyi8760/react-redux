@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 
 export default class Weather extends Component {
     constructor(props) {
@@ -12,6 +13,12 @@ export default class Weather extends Component {
 
     static propTypes = {
         cityCode: PropTypes.number.isRequired
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log(nextProps, this.props, nextProps.children === this.props.children);
+        console.log(nextState, this.state, nextState.weather === this.state.weather);
+        return true;
     }
 
     componentDidMount() {
