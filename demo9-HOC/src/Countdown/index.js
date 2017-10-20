@@ -8,8 +8,12 @@ export default class Countdown extends Component {
     }
 
     static propTypes = {
-        children:PropTypes.func.isRequired,
-        beginValue:PropTypes.number.isRequired
+        children: PropTypes.func.isRequired,
+        beginValue: PropTypes.number.isRequired
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState.count != this.state.count
     }
 
     componentDidMount() {
