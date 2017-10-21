@@ -1,23 +1,18 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
-import {TODOTYPES} from "../constant";
+import thunkMiddleware from 'redux-thunk'
 // import Perf from 'react-addons-perf'
 
-import {Reducer as TodoReduce} from '../todos'
-import {Reducer as FilterReduce} from '../filter'
-
-const TypeReduce = state => [...TODOTYPES]
+import {Reducer as fetchWeatherReducer} from '../weather'
 
 const win = window
 /*//供perf-react性能监控组件调用(暂不支持react16)
 win.Perf = Perf*/
 
 const reducer = combineReducers({
-    todo: TodoReduce,
-    filter: FilterReduce,
-    todoType: TypeReduce
+    weather: fetchWeatherReducer,
 })
 
-const middlewares = []
+const middlewares = [thunkMiddleware]
 //用于开发环境下检查reducer是否为纯函数(不直接修改state)
 if (process.env.NODE_ENV !== 'production') {
     //push进中间件数组供applyMiddleware调用

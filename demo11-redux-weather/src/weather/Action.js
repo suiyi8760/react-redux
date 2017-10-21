@@ -19,7 +19,7 @@ const fetchWeather = cityCode => dispatch => {
 
     dispatch(fetchWeatherStarted())
 
-    return fetch(apiUrl)
+    fetch(apiUrl)
         .then(res => {
             if (res.status !== 200) {
                 throw new Error(`Fail to get response with ${res.status}`)

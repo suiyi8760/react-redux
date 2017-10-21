@@ -1,46 +1,21 @@
-import {Component} from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+// import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {LOADING,SUCCESS,FAILURE} from "./status";
 
-export default class Weather extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            weather: null,
-            cityCode: props.cityCode
-        }
-    }
-
-    static propTypes = {
-        cityCode: PropTypes.number.isRequired
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log(nextProps, this.props, nextProps.children === this.props.children);
-        console.log(nextState, this.state, nextState.weather === this.state.weather);
-        return true;
-    }
-
-    componentDidMount() {
-        const apiUrl = `/data/cityinfo/${this.state.cityCode}.html`
-
-        fetch(apiUrl)
-            .then(res => {
-                console.log(res);
-                if (res.status !== 200) {
-                    throw new Error(`Fail to get response with ${res.status}`)
-                }
-                res.json()
-                    .then(resJson => {
-                        console.log(resJson, '++json');
-                        this.setState({weather: resJson.weatherinfo})
-                    })
-                    .catch(err => this.setState({weather: null}))
-            })
-            .catch(err => this.setState({weather: null}))
-    }
-
-    render() {
-        return this.props.children(this.state.weather)
-    }
+const ShowWeather = ({status,city,weather,temp1,temp2})=>{
+   switch (status){
+       case LOADING:
+           return (<div>Loading...</div>)
+       case SUCCESS:
+           return (<div>{city}:{weather}---Max Temp:{temp2}---Min Temp:{temp1}</div>)
+       case FAILURE:
+           return (<div>Something wrong with network</div>)
+   }
 }
+
+const mapState = state => {
+    return {...state.weather}
+}
+
+export default connect(mapState)(ShowWeather)
