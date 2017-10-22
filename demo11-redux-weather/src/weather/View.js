@@ -11,6 +11,8 @@ const ShowWeather = ({status,city,weather,temp1,temp2})=>{
            return (<div>{city}:{weather}---Max Temp:{temp2}---Min Temp:{temp1}</div>)
        case FAILURE:
            return (<div>Something wrong with network</div>)
+       default:
+           return (<div>Fixing...</div>)
    }
 }
 

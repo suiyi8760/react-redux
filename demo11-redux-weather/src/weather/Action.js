@@ -14,10 +14,20 @@ const fetchWeatherFail = error => ({
     error
 })
 
+let curReqId = 0
+
 const fetchWeather = cityCode => dispatch => {
     const apiUrl = `/data/cityinfo/${cityCode}.html`
+    const reqId = ++curReqId
 
-    dispatch(fetchWeatherStarted())
+    const dispatchIfValid = action => {
+        console.log(reqId, curReqId);
+        if (reqId === curReqId) {
+            return dispatch(action)
+        }
+    }
+
+    dispatchIfValid(fetchWeatherStarted())
 
     fetch(apiUrl)
         .then(res => {
@@ -25,10 +35,10 @@ const fetchWeather = cityCode => dispatch => {
                 throw new Error(`Fail to get response with ${res.status}`)
             }
             res.json()
-                .then(resJson => dispatch(fetchWeatherSuccess(resJson.weatherinfo)))
-                .catch(err => dispatch(fetchWeatherFail(err)))
+                .then(resJson => dispatchIfValid(fetchWeatherSuccess(resJson.weatherinfo)))
+                .catch(err => dispatchIfValid(fetchWeatherFail(err)))
         })
-        .catch(err => dispatch(fetchWeatherFail(err)))
+        .catch(err => dispatchIfValid(fetchWeatherFail(err)))
 }
 
 export {fetchWeatherStarted, fetchWeatherSuccess, fetchWeatherFail, fetchWeather}
